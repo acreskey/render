@@ -12,7 +12,6 @@ const html = `
 <html>
   <head>
     <title>Hello from Render!</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
       setTimeout(() => {
         confetti({
@@ -52,8 +51,34 @@ const html = `
   </head>
   <body>
     <section>
-      Hello from Render!
+      Upload test
     </section>
+    <input type="file" id="fileUpload" />
+   
+   <script>
+       const handleImageUpload = event => {
+      const files = event.target.files
+      const formData = new FormData()
+      formData.append('myFile', files[0])
+
+      fetch('/saveImage', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.path)
+      })
+      .catch(error => {
+        console.error(error)
+      })
+    }
+
+    document.querySelector('#fileUpload').addEventListener('change', event => {
+      handleImageUpload(event)
+    })
+   </script>
+
   </body>
 </html>
 `
