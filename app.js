@@ -59,11 +59,13 @@ const html = `
       Upload test
     </section>
     <input type="file" id="fileUpload" />
+    <p id="upload_status"> </p>
    
    <script>
    
       let upload_status = "not started";
       console.log("upload_status: " + upload_status);
+      document.getElementById('upload_status').innerHTML = upload_status;
       
       const handleImageUpload = event => {
       const files = event.target.files
@@ -81,11 +83,13 @@ const html = `
         console.log("success: " + data.path);
         upload_status = "complete";
         console.log("upload_status: " + upload_status);
+        document.getElementById('upload_status').innerHTML = upload_status;
       })
       .catch(error => {
         upload_status = "error";
         console.log("upload_status: " + upload_status);
         console.error(error)
+        document.getElementById('upload_status').innerHTML = upload_status;
       })
     }
 
