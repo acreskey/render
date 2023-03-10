@@ -9,7 +9,9 @@ app.post('/saveImage', (req, res) => {
   const fileName = req.files.myFile.name
   const path = __dirname + '/images/' + fileName
 
-  image.mv(path, (error) => {
+  console.log("/saveImage: " + fileName);
+  
+  req.files.myFile.mv(path, (error) => {
     if (error) {
       console.error(error)
       res.writeHead(500, {
