@@ -61,20 +61,26 @@ const html = `
     <input type="file" id="fileUpload" />
    
    <script>
-       const handleImageUpload = event => {
+   
+      let upload_status = "not started";
+      
+      const handleImageUpload = event => {
       const files = event.target.files
       const formData = new FormData()
       formData.append('myFile', files[0])
 
+      upload_status = "started";
       fetch('/saveFile', {
         method: 'POST',
         body: formData
       })
       .then(response => response.json())
       .then(data => {
-        console.log(data.path)
+        console.log("success: " + data.path)
+        upload_status = "complete";
       })
       .catch(error => {
+        upload_status = "error";
         console.error(error)
       })
     }
