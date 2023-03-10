@@ -5,27 +5,15 @@ const port = process.env.PORT || 3001;
 
 app.use(fileupload());
 
-app.post('/saveImage', (req, res) => {
+app.post('/saveFile', (req, res) => {
   const fileName = req.files.myFile.name
-  const path = __dirname + '/images/' + fileName
 
-  console.log("/saveImage: " + fileName);
-  
-  req.files.myFile.mv(path, (error) => {
-    if (error) {
-      console.error(error)
-      res.writeHead(500, {
-        'Content-Type': 'application/json'
-      })
-      res.end(JSON.stringify({ status: 'error', message: error }))
-      return
-    }
+  console.log("/saveFile: " + fileName);
+  console.log("size: " + req.files.myFile.size + " truncated: " + req.files.myFile.truncated);
+  res.writeHead(200, {
+    'Content-Type': 'application/json'});
+  res.end(JSON.stringify({ status: 'success', path: fileName }));
 
-    res.writeHead(200, {
-      'Content-Type': 'application/json'
-    })
-    res.end(JSON.stringify({ status: 'success', path: '/img/houses/' + fileName }))
-  })
 })
 
 
@@ -78,7 +66,7 @@ const html = `
       const formData = new FormData()
       formData.append('myFile', files[0])
 
-      fetch('/saveImage', {
+      fetch('/saveFile', {
         method: 'POST',
         body: formData
       })
