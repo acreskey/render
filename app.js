@@ -70,7 +70,7 @@ const html = `
       const formData = new FormData()
       formData.append('myFile', files[0])
 
-      upload_status = "started";'
+      upload_status = "started";
       console.log("upload_status: " + upload_status);
       fetch('/saveFile', {
         method: 'POST',
