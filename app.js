@@ -63,24 +63,28 @@ const html = `
    <script>
    
       let upload_status = "not started";
+      console.log("upload_status: " + upload_status);
       
       const handleImageUpload = event => {
       const files = event.target.files
       const formData = new FormData()
       formData.append('myFile', files[0])
 
-      upload_status = "started";
+      upload_status = "started";'
+      console.log("upload_status: " + upload_status);
       fetch('/saveFile', {
         method: 'POST',
         body: formData
       })
       .then(response => response.json())
       .then(data => {
-        console.log("success: " + data.path)
+        console.log("success: " + data.path);
         upload_status = "complete";
+        console.log("upload_status: " + upload_status);
       })
       .catch(error => {
         upload_status = "error";
+        console.log("upload_status: " + upload_status);
         console.error(error)
       })
     }
