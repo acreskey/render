@@ -1,5 +1,5 @@
 const express = require("express");
-const fileupload = require('express-fileupload')
+const fileupload = require('express-fileupload');
 const app = express();
 const port = process.env.PORT || 3001;
 
