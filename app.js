@@ -16,7 +16,6 @@ app.post('/saveFile', (req, res) => {
 
 })
 
-
 app.get("/", (req, res) => res.type('html').send(html));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
@@ -85,7 +84,7 @@ const html = `
       .then(response => response.json())
       .then(data => {
         console.log("status: " + data.status + " " + data.path + " size: " + data.size);
-        set_upload_status("complete");
+        set_upload_status("success");
       })
       .catch(error => {
         console.error(error);        
