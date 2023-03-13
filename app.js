@@ -84,7 +84,7 @@ const html = `
       })
       .then(response => response.json())
       .then(data => {
-        console.log("success: " + data.path);
+        console.log("status: " + data.status + " " + data.path + " size: " + data.size);
         set_upload_status("complete");
       })
       .catch(error => {
