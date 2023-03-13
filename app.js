@@ -7,12 +7,12 @@ app.use(fileupload());
 
 app.post('/saveFile', (req, res) => {
   const fileName = req.files.myFile.name
-
   console.log("/saveFile: " + fileName);
+  
   console.log("size: " + req.files.myFile.size + " truncated: " + req.files.myFile.truncated);
   res.writeHead(200, {
     'Content-Type': 'application/json'});
-  res.end(JSON.stringify({ status: 'success', path: fileName }));
+  res.end(JSON.stringify({ status: 'success', path: fileName, size: req.files.myFile.size }));
 
 })
 
