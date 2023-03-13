@@ -38,7 +38,7 @@ const html = `
       html {
         font-family: neo-sans;
         font-weight: 700;
-        font-size: calc(62rem / 16);
+        font-size: calc(42rem / 16);
       }
       body {
         background: white;
@@ -62,18 +62,22 @@ const html = `
     <p id="upload_status"> </p>
    
    <script>
-   
-      let upload_status = "not started";
-      console.log("upload_status: " + upload_status);
-      document.getElementById('upload_status').innerHTML = upload_status;
+
+      function set_upload_status(status) {    
+        upload_status = status;
+        console.log("upload_status: " + status);
+        document.getElementById('upload_status').innerHTML = status;
+      }
       
-      const handleImageUpload = event => {
+      let upload_status = "";
+      set_upload_status("not_started");
+      
+      const handleFileUpload = event => {
       const files = event.target.files
       const formData = new FormData()
       formData.append('myFile', files[0])
 
-      upload_status = "started";
-      console.log("upload_status: " + upload_status);
+      set_upload_status("started");
       fetch('/saveFile', {
         method: 'POST',
         body: formData
@@ -81,20 +85,16 @@ const html = `
       .then(response => response.json())
       .then(data => {
         console.log("success: " + data.path);
-        upload_status = "complete";
-        console.log("upload_status: " + upload_status);
-        document.getElementById('upload_status').innerHTML = upload_status;
+        set_upload_status("complete");
       })
       .catch(error => {
-        upload_status = "error";
-        console.log("upload_status: " + upload_status);
-        console.error(error);
-        document.getElementById('upload_status').innerHTML = upload_status;
+        console.error(error);        
+        set_upload_status("error");
       })
     }
 
     document.querySelector('#fileUpload').addEventListener('change', event => {
-      handleImageUpload(event)
+      handleFileUpload(event)
     })
    </script>
 
