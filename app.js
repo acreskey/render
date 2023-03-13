@@ -88,7 +88,7 @@ const html = `
       .catch(error => {
         upload_status = "error";
         console.log("upload_status: " + upload_status);
-        console.error(error)
+        console.error(error);
         document.getElementById('upload_status').innerHTML = upload_status;
       })
     }
